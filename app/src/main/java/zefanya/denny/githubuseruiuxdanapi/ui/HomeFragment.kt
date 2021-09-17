@@ -92,6 +92,30 @@ class HomeFragment : Fragment(), ClickItemRvCallBack {
         super.onCreateOptionsMenu(menu, inflater)
         //val inflater = menuInflater
         inflater.inflate(R.menu.option_menu, menu)
+
+        val searchMenuItem = menu.findItem(R.id.search)
+        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu.findItem(R.id.search).actionView as SearchView
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+        searchView.queryHint = resources.getString(R.string.search)
+        if(searchQuery != ""){
+            searchMenuItem.expandActionView()
+            searchView.setQuery(searchQuery, false)
+            searchView.clearFocus()
+        }
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                searchQuery = query
+                getListuserName(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
