@@ -90,7 +90,6 @@ class HomeFragment : Fragment(), ClickItemRvCallBack {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        //val inflater = menuInflater
         inflater.inflate(R.menu.option_menu, menu)
 
         val searchMenuItem = menu.findItem(R.id.search)
@@ -99,7 +98,7 @@ class HomeFragment : Fragment(), ClickItemRvCallBack {
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
         searchView.queryHint = resources.getString(R.string.search)
-        if(searchQuery != ""){
+        if(searchQuery != "" && searchQuery != null){
             searchMenuItem.expandActionView()
             searchView.setQuery(searchQuery, false)
             searchView.clearFocus()
@@ -118,21 +117,12 @@ class HomeFragment : Fragment(), ClickItemRvCallBack {
         })
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.menu.favourite_menu->{
-                view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToFavouriteFragment())
-            }
 
-        }
-        return true
-    }
 
     override fun onItemClick(username: String) {
         val toDetailUserFragment =HomeFragmentDirections.actionHomeFragmentToDetailUserFragment()
         toDetailUserFragment.username = username
         view?.findNavController()?.navigate(toDetailUserFragment)
-        //Toast.makeText(context, id!!.toString(), Toast.LENGTH_SHORT).show()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

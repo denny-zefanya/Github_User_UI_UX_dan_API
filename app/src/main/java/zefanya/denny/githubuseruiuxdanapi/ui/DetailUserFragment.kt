@@ -1,13 +1,12 @@
 package zefanya.denny.githubuseruiuxdanapi.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -40,7 +39,7 @@ class DetailUserFragment : Fragment() {
                 StatusResponse.SUCCESS -> {
                     with(viewBinding) {
                         userEntity =
-                            FavouriteUserEntity(it.body?.login.toString(), it.body?.type.toString())
+                            FavouriteUserEntity(it.body?.login.toString(),it.body?.id!!, it.body?.type.toString())
                         tvName.text = it.body?.name
                         com.bumptech.glide.Glide.with(requireActivity())
                             .load("https://avatars.githubusercontent.com/u/" + it.body?.id)
@@ -115,5 +114,13 @@ class DetailUserFragment : Fragment() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.favourite_menu, menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        view?.findNavController()?.navigate(R.id.action_detailUserFragment_to_favouriteFragment)
+        return true
+    }
 }

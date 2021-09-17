@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import zefanya.denny.githubuseruiuxdanapi.adapter.ListUsernameAdapter
 import zefanya.denny.githubuseruiuxdanapi.data.source.remote.response.StatusResponse
@@ -56,6 +57,7 @@ class FollowingFragment(private val username: String): Fragment(), ClickItemRvCa
     }
 
     override fun onItemClick(username: String) {
+        Toast.makeText(context, "$username clicked", Toast.LENGTH_SHORT).show()
     }
 
 }

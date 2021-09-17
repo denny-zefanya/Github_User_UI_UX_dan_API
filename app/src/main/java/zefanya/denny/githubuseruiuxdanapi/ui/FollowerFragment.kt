@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import zefanya.denny.githubuseruiuxdanapi.adapter.ListUsernameAdapter
 import zefanya.denny.githubuseruiuxdanapi.data.source.remote.response.StatusResponse
@@ -59,7 +60,7 @@ class FollowerFragment(private val username: String) : Fragment(), ClickItemRvCa
     }
 
     override fun onItemClick(username: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(context, "$username clicked", Toast.LENGTH_SHORT).show()
     }
 
 }

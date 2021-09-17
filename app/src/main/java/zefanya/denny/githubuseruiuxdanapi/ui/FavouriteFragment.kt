@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import zefanya.denny.githubuseruiuxdanapi.R
 import zefanya.denny.githubuseruiuxdanapi.adapter.ListUsernameAdapter
@@ -41,7 +42,9 @@ class FavouriteFragment : Fragment(), ClickItemRvCallBack {
     }
 
     override fun onItemClick(username: String) {
-        TODO("Not yet implemented")
+        val toDetailUserFragment = FavouriteFragmentDirections.actionFavouriteFragmentToDetailUserFragment()
+        toDetailUserFragment.username = username
+        view?.findNavController()?.navigate(toDetailUserFragment)
     }
 
 
