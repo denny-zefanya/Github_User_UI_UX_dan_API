@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Github User UI UX dan API</string>
+    <string name="search">Search</string>
+    <string name="data_github">follower: %d, following: %d, repos: %d, gists %d</string>
+    <string name="follower">Follower</string>
+    <string name="following">Following</string>
+    <string name="username">Username</string>
+    <string name="type">Type</string>
+    <string name="score">Score</string>
+    <string name="f_username">: %s</string>
+    <string name="f_type">: %s</string>
+    <string name="f_score">: %s</string>
+    <string name="add_to_favorite">Add to Favourite</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
