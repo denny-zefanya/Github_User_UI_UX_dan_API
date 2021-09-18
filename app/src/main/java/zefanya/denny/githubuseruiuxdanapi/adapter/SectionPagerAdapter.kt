@@ -2,8 +2,8 @@ package zefanya.denny.githubuseruiuxdanapi.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import zefanya.denny.githubuseruiuxdanapi.ui.FollowerFragment
-import zefanya.denny.githubuseruiuxdanapi.ui.FollowingFragment
+import zefanya.denny.githubuseruiuxdanapi.ui.follower.FollowerFragment
+import zefanya.denny.githubuseruiuxdanapi.ui.following.FollowingFragment
 
 class SectionPagerAdapter(fa: Fragment,val username: String) : FragmentStateAdapter(fa) {
     override fun getItemCount(): Int = 2

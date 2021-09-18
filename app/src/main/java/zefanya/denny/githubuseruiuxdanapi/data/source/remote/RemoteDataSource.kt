@@ -47,73 +47,74 @@ class RemoteDataSource private constructor() {
         return resultList
     }
 
-    fun getDetailUser(username: String): LiveData<ApiResponse<DetailUserResponse?>>{
-        var result = MutableLiveData<ApiResponse<DetailUserResponse?>>()
+    fun getDetailUser(username: String): LiveData<ApiResponse<DetailUserResponse?>> {
+        val result = MutableLiveData<ApiResponse<DetailUserResponse?>>()
 
-        ApiConfig.provideApiService().getDetailUsername(username).enqueue(object: Callback<DetailUserResponse>{
-            override fun onResponse(
-                call: Call<DetailUserResponse>,
-                response: Response<DetailUserResponse>
-            ) {
-                if(response.isSuccessful){
-                    val data = response.body()
-                    result.value = ApiResponse.success(data)
+        ApiConfig.provideApiService().getDetailUsername(username)
+            .enqueue(object : Callback<DetailUserResponse> {
+                override fun onResponse(
+                    call: Call<DetailUserResponse>,
+                    response: Response<DetailUserResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val data = response.body()
+                        result.value = ApiResponse.success(data)
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
-                result.value = ApiResponse.error("Error", null)
-            }
+                override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
+                    result.value = ApiResponse.error("Error", null)
+                }
 
-        })
+            })
 
         return result
     }
 
-    fun getFollowerUser(username: String): LiveData<ApiResponse<List<ItemsItem>?>>{
-        var resultList = MutableLiveData<ApiResponse<List<ItemsItem>?>>()
+    fun getFollowerUser(username: String): LiveData<ApiResponse<List<ItemsItem>?>> {
+        val resultList = MutableLiveData<ApiResponse<List<ItemsItem>?>>()
         resultList.value = ApiResponse.loading("kosong", null)
-        ApiConfig.provideApiService().getFollower(username).enqueue(object: Callback<List<ItemsItem>>{
-            override fun onResponse(
-                call: Call<List<ItemsItem>>,
-                response: Response<List<ItemsItem>>
-            ) {
-                if(response.isSuccessful){
-                    val dataArray = response.body()
-                    if (dataArray!!.isNotEmpty())
+        ApiConfig.provideApiService().getFollower(username)
+            .enqueue(object : Callback<List<ItemsItem>> {
+                override fun onResponse(
+                    call: Call<List<ItemsItem>>,
+                    response: Response<List<ItemsItem>>
+                ) {
+                    if (response.isSuccessful) {
+                        val dataArray = response.body()
                         resultList.value = ApiResponse.success(dataArray)
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<List<ItemsItem>>, t: Throwable) {
-                resultList.value = ApiResponse.error(t.message.toString(),null)
-            }
+                override fun onFailure(call: Call<List<ItemsItem>>, t: Throwable) {
+                    resultList.value = ApiResponse.error(t.message.toString(), null)
+                }
 
-        })
+            })
         return resultList
     }
 
-    fun getFollowingUser(username: String): LiveData<ApiResponse<List<ItemsItem>?>>{
-        var resultList = MutableLiveData<ApiResponse<List<ItemsItem>?>>()
+    fun getFollowingUser(username: String): LiveData<ApiResponse<List<ItemsItem>?>> {
+        val resultList = MutableLiveData<ApiResponse<List<ItemsItem>?>>()
         resultList.value = ApiResponse.loading("kosong", null)
-        ApiConfig.provideApiService().getFollowing(username).enqueue(object: Callback<List<ItemsItem>>{
-            override fun onResponse(
-                call: Call<List<ItemsItem>>,
-                response: Response<List<ItemsItem>>
-            ) {
-                if(response.isSuccessful){
-                    val dataArray = response.body()
-                    if (dataArray!!.isNotEmpty())
+        ApiConfig.provideApiService().getFollowing(username)
+            .enqueue(object : Callback<List<ItemsItem>> {
+                override fun onResponse(
+                    call: Call<List<ItemsItem>>,
+                    response: Response<List<ItemsItem>>
+                ) {
+                    if (response.isSuccessful) {
+                        val dataArray = response.body()
                         resultList.value = ApiResponse.success(dataArray)
 
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<List<ItemsItem>>, t: Throwable) {
-                resultList.value = ApiResponse.error(t.message.toString(),null)
-            }
+                override fun onFailure(call: Call<List<ItemsItem>>, t: Throwable) {
+                    resultList.value = ApiResponse.error(t.message.toString(), null)
+                }
 
-        })
+            })
         return resultList
     }
 }

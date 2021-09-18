@@ -11,6 +11,8 @@ data class FavouriteUserEntity (
     @NonNull
     @ColumnInfo(name = "username")
     var username: String = "denny",
+    @ColumnInfo(name = "id_login")
+    var idLogin: Int = 0,
     @ColumnInfo(name="type")
     var type: String ="admin"
 )

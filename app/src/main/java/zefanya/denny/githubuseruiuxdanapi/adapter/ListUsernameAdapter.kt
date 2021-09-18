@@ -23,7 +23,7 @@ class ListUsernameAdapter(private val clickItemRvCallBack: ClickItemRvCallBack) 
     fun setData(newListData: List<ItemsItem>?) {
         listData.clear()
         if(newListData!=null)
-            listData.addAll(newListData!!)
+            listData.addAll(newListData)
         notifyDataSetChanged()
     }
 

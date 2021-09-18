@@ -1,4 +1,4 @@
-package zefanya.denny.githubuseruiuxdanapi.ui
+package zefanya.denny.githubuseruiuxdanapi.ui.detailuser
 
 import androidx.lifecycle.ViewModel
 import zefanya.denny.githubuseruiuxdanapi.data.Repository

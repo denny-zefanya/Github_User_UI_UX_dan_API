@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import zefanya.denny.githubuseruiuxdanapi.data.Repository
 import zefanya.denny.githubuseruiuxdanapi.di.Injection
-import zefanya.denny.githubuseruiuxdanapi.ui.DetailUserViewModel
-import zefanya.denny.githubuseruiuxdanapi.ui.FavouriteViewModel
-import zefanya.denny.githubuseruiuxdanapi.ui.HomeViewModel
+import zefanya.denny.githubuseruiuxdanapi.ui.detailuser.DetailUserViewModel
+import zefanya.denny.githubuseruiuxdanapi.ui.favourite.FavouriteViewModel
+import zefanya.denny.githubuseruiuxdanapi.ui.home.HomeViewModel
 
 class ViewModelFactory private constructor(private val repository: Repository) :
     ViewModelProvider.NewInstanceFactory() {

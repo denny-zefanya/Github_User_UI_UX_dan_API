@@ -1,4 +1,4 @@
-package zefanya.denny.githubuseruiuxdanapi.ui
+package zefanya.denny.githubuseruiuxdanapi.ui.detailuser
 
 import android.os.Bundle
 import android.view.*
@@ -6,7 +6,6 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -19,6 +18,8 @@ import zefanya.denny.githubuseruiuxdanapi.data.source.remote.response.ApiRespons
 import zefanya.denny.githubuseruiuxdanapi.data.source.remote.response.DetailUserResponse
 import zefanya.denny.githubuseruiuxdanapi.data.source.remote.response.StatusResponse
 import zefanya.denny.githubuseruiuxdanapi.databinding.FragmentDetailUserBinding
+import zefanya.denny.githubuseruiuxdanapi.ui.home.HomeActivity
+import zefanya.denny.githubuseruiuxdanapi.util.ThemeHelper
 import zefanya.denny.githubuseruiuxdanapi.viewmodel.ViewModelFactory
 
 class DetailUserFragment : Fragment() {
@@ -33,28 +34,29 @@ class DetailUserFragment : Fragment() {
     private lateinit var viewPager: ViewPager2
     private var userEntity: FavouriteUserEntity? = null
     private var isFav: Boolean = false
+    private var username: String =""
     private val detailUserObserver = Observer<ApiResponse<DetailUserResponse?>> {
         if (it != null) {
             when (it.status) {
                 StatusResponse.SUCCESS -> {
                     with(viewBinding) {
                         userEntity =
-                            FavouriteUserEntity(it.body?.login.toString(),it.body?.id!!, it.body?.type.toString())
-                        tvName.text = it.body?.name
+                            FavouriteUserEntity(it.body?.login.toString(),it.body?.id!!, it.body.type.toString())
+                        tvName.text = it.body.name
                         com.bumptech.glide.Glide.with(requireActivity())
-                            .load("https://avatars.githubusercontent.com/u/" + it.body?.id)
+                            .load("https://avatars.githubusercontent.com/u/" + it.body.id)
                             .apply(
                                 com.bumptech.glide.request.RequestOptions.placeholderOf(R.drawable.ic_loading)
                                     .error(R.drawable.ic_baseline_error_24)
                             )
                             .into(ivAvatar)
-                        tvLocation.text = it.body?.location
+                        tvLocation.text = it.body.location
                         tvDataGithub.text = resources.getString(
                             R.string.data_github,
-                            it.body?.followers,
-                            it.body?.following,
-                            it.body?.public_repos,
-                            it.body?.public_gists
+                            it.body.followers,
+                            it.body.following,
+                            it.body.public_repos,
+                            it.body.public_gists
                         )
                     }
 
@@ -76,16 +78,10 @@ class DetailUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val username = DetailUserFragmentArgs.fromBundle(
+            (activity as HomeActivity).supportActionBar?.title =getString(R.string.detail_user)
+            username = DetailUserFragmentArgs.fromBundle(
                 arguments as Bundle
             ).username
-            sectionPagerAdapter = SectionPagerAdapter(this, username)
-            viewPager = viewBinding.viewPager
-            viewPager.adapter = sectionPagerAdapter
-            val tabs: TabLayout = viewBinding.tabs
-            TabLayoutMediator(tabs, viewPager) { tab, position ->
-                tab.text = resources.getString(TAB_TITLES[position])
-            }.attach()
             val factory = ViewModelFactory.getInstance(requireContext())
             viewModel = ViewModelProvider(this, factory).get(
                 DetailUserViewModel::class.java
@@ -116,11 +112,31 @@ class DetailUserFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.favourite_menu, menu)
+        inflater.inflate(R.menu.option_menu, menu)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val item = menu.findItem(R.id.item_favourite)
+        if(item != null)
+            item.isVisible = false
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        view?.findNavController()?.navigate(R.id.action_detailUserFragment_to_favouriteFragment)
+        val themeHelper = ThemeHelper()
+        themeHelper.chooseThemeDialog(requireContext())
         return true
     }
+
+    override fun onResume() {
+        super.onResume()
+        sectionPagerAdapter = SectionPagerAdapter(this, username)
+        viewPager = viewBinding.viewPager
+        viewPager.adapter = sectionPagerAdapter
+        val tabs: TabLayout = viewBinding.tabs
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
+    }
+
+
 }

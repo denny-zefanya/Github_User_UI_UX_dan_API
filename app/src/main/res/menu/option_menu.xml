@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_baseline_search_white_24"
-        android:title= "@string/search"
-        app:actionViewClass ="androidx.appcompat.widget.SearchView"
-        app:showAsAction = "collapseActionView|always"
+        android:id="@+id/item_setting"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title= "@string/setting"
+        app:showAsAction = "ifRoom"
+        />
+    <item
+        android:id="@+id/item_favourite"
+        android:icon="@drawable/ic_favourite_fill"
+        android:title= "@string/favourite"
+        app:showAsAction = "always"
         />
 
 </menu>

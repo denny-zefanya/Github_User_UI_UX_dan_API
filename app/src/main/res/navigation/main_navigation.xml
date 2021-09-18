@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="zefanya.denny.githubuseruiuxdanapi.ui.HomeFragment"
+        android:name="zefanya.denny.githubuseruiuxdanapi.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailUserFragment"
-        android:name="zefanya.denny.githubuseruiuxdanapi.ui.DetailUserFragment"
+        android:name="zefanya.denny.githubuseruiuxdanapi.ui.detailuser.DetailUserFragment"
         android:label="fragment_detail_user"
         tools:layout="@layout/fragment_detail_user" >
         <argument
@@ -32,11 +32,29 @@
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
-        android:name="zefanya.denny.githubuseruiuxdanapi.FavouriteFragment"
+        android:name="zefanya.denny.githubuseruiuxdanapi.ui.favourite.FavouriteFragment"
         android:label="fragment_favourite"
         tools:layout="@layout/fragment_favourite" >
         <action
             android:id="@+id/action_favouriteFragment_to_detailUserFragment"
+            app:destination="@id/detailUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/followerFragment"
+        android:name="zefanya.denny.githubuseruiuxdanapi.ui.follower.FollowerFragment"
+        android:label="fragment_follower"
+        tools:layout="@layout/fragment_follower" >
+        <action
+            android:id="@+id/action_followerFragment_to_detailUserFragment"
+            app:destination="@id/detailUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/followingFragment"
+        android:name="zefanya.denny.githubuseruiuxdanapi.ui.following.FollowingFragment"
+        android:label="fragment_following"
+        tools:layout="@layout/fragment_following" >
+        <action
+            android:id="@+id/action_followingFragment_to_detailUserFragment"
             app:destination="@id/detailUserFragment" />
     </fragment>
 </navigation>

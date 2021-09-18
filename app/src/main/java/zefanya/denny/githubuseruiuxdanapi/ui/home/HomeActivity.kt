@@ -1,4 +1,4 @@
-package zefanya.denny.githubuseruiuxdanapi.ui
+package zefanya.denny.githubuseruiuxdanapi.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
